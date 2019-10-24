@@ -4,13 +4,18 @@ import { Routes, RouterModule } from '@angular/router';
 import {
   AboutComponent,
   PathNotFoundComponent,
-  MessagesComponent
+  MessagesComponent,
+  LoginComponent
 } from './layout';
 
 const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'messages',

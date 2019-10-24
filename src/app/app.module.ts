@@ -9,6 +9,7 @@ import { LayoutModule } from './layout/layout.module';
 import { AppRoutingModule } from './app-routing.module';
 import { TasksModule } from './tasks/tasks.module';
 import { UsersModule } from './users/users.module';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { UsersModule } from './users/users.module';
     LayoutModule,
     TasksModule,
     UsersModule,
+    AdminModule,
     AppRoutingModule
   ],
   providers: [],
