@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet, Router } from '@angular/router';
+import { Title, Meta } from '@angular/platform-browser';
 
 import { SpinnerService } from './widgets';
 import { MessagesService, CustomPreloadingStrategyService } from './core';
@@ -14,7 +15,9 @@ export class AppComponent implements OnInit {
     public spinnerService: SpinnerService,
     public messagesService: MessagesService,
     private router: Router,
-    private preloadingStrategy: CustomPreloadingStrategyService
+    private preloadingStrategy: CustomPreloadingStrategyService,
+    private titleService: Title,
+    private metaService: Meta
   ) {}
 
   ngOnInit() {
@@ -26,6 +29,8 @@ export class AppComponent implements OnInit {
 
   onActivate($event: any, routerOutlet: RouterOutlet) {
     console.log('Activated Component', $event, routerOutlet);
+    this.titleService.setTitle(routerOutlet.activatedRouteData.title);
+    this.metaService.addTags(routerOutlet.activatedRouteData.meta);
   }
 
   onDeactivate($event: any, routerOutlet: RouterOutlet) {
