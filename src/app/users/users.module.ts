@@ -8,6 +8,6 @@ import { UserComponent } from './components';
 
 @NgModule({
   declarations: [UserComponent, ...UsersRoutingModule.components],
-  imports: [CommonModule, UsersRoutingModule, FormsModule, UsersServicesModule]
+  imports: [CommonModule, FormsModule, UsersServicesModule, UsersRoutingModule]
 })
 export class UsersModule {}

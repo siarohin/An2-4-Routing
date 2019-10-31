@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {
+  Routes,
+  RouterModule,
+  PreloadAllModules,
+  ExtraOptions
+} from '@angular/router';
 
 import {
   AboutComponent,
@@ -7,6 +12,7 @@ import {
   MessagesComponent,
   LoginComponent
 } from './layout';
+import { AuthGuard, CustomPreloadingStrategyService } from './core';
 
 const routes: Routes = [
   {
@@ -17,6 +23,17 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
+  {
+    path: 'admin',
+    canLoad: [AuthGuard],
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+  },
+  {
+    path: 'users',
+    loadChildren: () => import('./users/users.module').then(m => m.UsersModule),
+    data: { preload: true }
+  },
+
   {
     path: 'messages',
     component: MessagesComponent,
@@ -35,8 +52,13 @@ const routes: Routes = [
   }
 ];
 
+const extraOptions: ExtraOptions = {
+  preloadingStrategy: CustomPreloadingStrategyService,
+  enableTracing: true // Makes the router log all its internal events to the console.
+};
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, extraOptions)],
   // imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })

@@ -1,18 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet, Router } from '@angular/router';
 
-import { MessagesService } from './core';
+import { SpinnerService } from './widgets';
+import { MessagesService, CustomPreloadingStrategyService } from './core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor(
+    public spinnerService: SpinnerService,
     public messagesService: MessagesService,
-    private router: Router
+    private router: Router,
+    private preloadingStrategy: CustomPreloadingStrategyService
   ) {}
+
+  ngOnInit() {
+    console.log(
+      `Preloading Modules: `,
+      this.preloadingStrategy.preloadedModules
+    );
+  }
 
   onActivate($event: any, routerOutlet: RouterOutlet) {
     console.log('Activated Component', $event, routerOutlet);
